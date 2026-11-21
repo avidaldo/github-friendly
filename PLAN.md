@@ -120,6 +120,8 @@ github-friendly/
 | La app de Codex existe para Windows; necesita Git instalado aparte y `gh auth login` para las funciones de GitHub; su *sandbox* bloquea la red salvo aprobación | [Codex app en Windows](https://developers.openai.com/codex/app/windows), [Windows sandbox](https://learn.chatgpt.com/docs/windows/windows-sandbox.md) |
 | GitHub Pages: en el plan Free solo repos públicos; en privados hace falta Pro, Team o Enterprise. La web publicada es pública aunque el repositorio sea privado (salvo Enterprise Cloud) | [What is GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) |
 | `gh skill install` (gh ≥ 2.90, en *preview*): descubre skills en `skills/*/SKILL.md`; instala por defecto en el proyecto; Codex, Antigravity y Copilot comparten `.agents/skills`; `--all` instala todas sin preguntar; `--pin` fija una etiqueta o *commit*; guarda el origen en el *frontmatter* de cada skill para `gh skill update` | [gh skill install](https://cli.github.com/manual/gh_skill_install), [anuncio](https://github.blog/changelog/2026-04-16-manage-agent-skills-with-github-cli/) |
+| Desde GitHub (`gh skill install avidaldo/github-friendly --all --dir .agents/skills`), cada skill queda con `metadata.github-repo`, `github-path`, `github-ref` y `github-tree-sha`, y `gh skill update --all --dir .agents/skills` las encuentra. Sin `--dir`, `gh skill update` revisa también las skills personales del ordenador | Prueba en Linux, 21-nov-2026 |
+| La ayuda (`docs/`) se publica en Pages desde `main` con el tema por defecto de GitHub, y los enlaces a `.md` se convierten en enlaces a las páginas | https://avidaldo.github.io/github-friendly/, 21-nov-2026 |
 | Con gh 2.105: `gh skill install <carpeta> --from-local --all --dir .agents/skills` funciona en una carpeta sin Git, copia las subcarpetas de cada skill (plantillas incluidas) y reescribe el *frontmatter* con los datos de origen; `gh skill publish --dry-run` valida las skills contra la especificación | Prueba local, 21-nov-2026 |
 | Licencia educativa para docentes: GitHub Team gratis («usuarios ilimitados y repositorios privados») y Copilot Pro. No menciona GitHub Pro. Requisitos: cuenta personal de GitHub, correo del centro y documentos que prueben la relación con el centro; se pide en `github.com/settings/education/benefits` | [About GitHub Education for teachers](https://docs.github.com/en/education/about-github-education/github-education-for-teachers/about-github-education-for-teachers), [Apply as a teacher](https://docs.github.com/en/education/about-github-education/github-education-for-teachers/apply-to-github-education-as-a-teacher) |
 
@@ -127,7 +129,7 @@ github-friendly/
 
 | # | Qué | Cómo |
 |---|---|---|
-| V1 | `gh skill install avidaldo/github-friendly`: metadatos de origen que deja, si `gh skill update --all` los encuentra en `.agents/skills`, comportamiento en Windows | Con el repositorio real |
+| V1 | `gh skill install` y `gh skill update` en Windows | Prueba en Windows |
 | V2 | Cada herramienta carga `AGENTS.md` y detecta skills instaladas a mitad de sesión (o hay que reiniciar). En especial la ventana Agents de VS Code | Prueba en las tres herramientas |
 | V3 | Las frases de la tabla 3.4 activan la skill correcta en cada herramienta | Prueba en las tres herramientas |
 | V4 | Codex: qué modo de permisos evita pedir aprobación en cada `push` o llamada a `gh` sin abrir más de lo necesario | Documentación + prueba |
@@ -139,7 +141,6 @@ github-friendly/
 | V10 | GitHub Team es un plan de organización (con cuentas personales la licencia educativa no permite repos privados con Pages); estado de la pausa de altas de Copilot Pro anunciada en abril de 2026 para docentes | Página de planes de GitHub y de Copilot para docentes |
 | V11 | Instalación de Git y GitHub CLI en Windows (instaladores gráficos o `winget`) y en macOS (instalador `.pkg` de `gh`; Git mediante las herramientas de Xcode) | Documentación oficial + prueba |
 | V12 | Límites de tamaño: de un archivo, de un repositorio y de la web publicada en Pages, y el tráfico mensual de Pages | Documentación de GitHub |
-| V13 | GitHub Pages aplica un tema a la ayuda (`docs/`) sin indicar ninguno en `_config.yml`, y convierte los enlaces a `.md` en enlaces a las páginas | Al activar Pages en el repositorio del kit |
 | V14 | Los pasos de la ayuda para instalar en macOS | Un Mac real |
 
 ## 5. Documentación
@@ -175,8 +176,8 @@ Una organización hace que los repositorios no dependan de una persona y, con Gi
 - [x] `pruebas/`: GitHub simulado y escenarios de la sección 7; pruebas del script de la portada.
 - [x] README con el apartado para agentes, `DESARROLLO.md` y web de ayuda (`docs/`).
 - [x] Dos rondas de pruebas con agentes sin contexto (S1-S13) y sus correcciones; S0 y S10, sin agente.
-- [ ] Crear el repositorio del kit en GitHub, registrarlo en el workspace con `ws add` y activar el Pages de la ayuda (**pide confirmación**).
-- [ ] Verificaciones V1, V6, V7, V8 y V13 con un repositorio de prueba en GitHub (**pide confirmación**: crea recursos remotos); probar `publicar` e `invitar` de punta a punta.
+- [x] Crear el repositorio del kit en GitHub, registrarlo en el workspace con `ws add` y activar el Pages de la ayuda.
+- [ ] Verificaciones V6, V7 y V8 con un repositorio de prueba en GitHub (**pide confirmación**: crea recursos remotos); probar `publicar` e `invitar` de punta a punta.
 - [ ] Pruebas con las herramientas reales (V2-V5, V9) en Windows.
 - [ ] Primera versión etiquetada; pasar lo vigente de este plan a `DESARROLLO.md` y borrar `PLAN.md`.
 

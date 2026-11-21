@@ -83,6 +83,6 @@ Solo si el proyecto ya está en GitHub o la persona ha aceptado crearlo.
 
 Cuando la persona pida actualizar el kit:
 
-1. `gh skill update --all`. Si dice que una skill no tiene datos de origen, reinstala: `gh skill install avidaldo/github-friendly --all --dir .agents/skills --force`.
+1. `gh skill update --all --dir .agents/skills`. Sin `--dir` revisaría también las skills personales del ordenador, que no son del proyecto. Si dice que una skill del kit no tiene datos de origen, reinstala: `gh skill install avidaldo/github-friendly --all --dir .agents/skills --force`.
 2. Repite esta skill desde la sección 1: así el bloque de `AGENTS.md` y las plantillas quedan al día.
 3. Guarda y publica los cambios con `guardar` y `publicar`. El resto del equipo los recibirá al empezar su siguiente sesión.
