@@ -1,0 +1,39 @@
+# Publica las webs del proyecto en GitHub Pages cada vez que algo llega a main.
+# Forma parte del kit github-friendly: se reescribe al actualizar el kit.
+name: Publicar la web
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Una sola publicación a la vez; la que está en marcha no se cancela.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el proyecto
+        uses: actions/checkout@v7
+      - name: Preparar Pages
+        uses: actions/configure-pages@v6
+      - name: Montar la web y su portada
+        run: python3 .github/scripts/montar_web.py
+      - name: Subir la web
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+      - name: Publicar en GitHub Pages
+        id: despliegue
+        uses: actions/deploy-pages@v5

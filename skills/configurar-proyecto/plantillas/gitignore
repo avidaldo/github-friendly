@@ -1,0 +1,6 @@
+# kit github-friendly: archivos que no se suben
+_site/
+.env
+.DS_Store
+Thumbs.db
+desktop.ini
